@@ -38,7 +38,7 @@ const createUser = async (req, res) => {
         password : await bcrypt.hash(password,10),
         email
     }
-    console.log(data.password);
+    // console.log(data.password);
     
     let udata = await user.create(data);
     let genToken = await udata.genAuthToken();
@@ -54,7 +54,7 @@ const createUser = async (req, res) => {
     })(email, link);
     await transport.sendMail(option, (err, info) => {
       if (err) console.log(err);
-      console.log(info);
+      // console.log(info);
     });
     // use nodemailer and send link from user email.
     return res.send({ msg: "User Successfully Registerd.", udata }); // first to check user email alrady is exist or not send link for his dashbordd page in gmail via req.query and account is activation and redirect to other page some time...
@@ -62,6 +62,13 @@ const createUser = async (req, res) => {
     return res.send({ msg: "User Created Time Error Occured.", err: error });
   }
 };
+
+const decodeUser = async (req,res) => {
+   const {data} = await req.body
+   console.log(req.body);
+   console.log(data);
+   res.send({});
+}
 
 const activateUser = async (req, res) => {
   const { verifyLink } = req.query;
@@ -114,4 +121,4 @@ const activateUser1 = async (req, res) => {
   return res.send({ msg: "Data deleted.", data });
 };
 
-module.exports = { getAllUser, createUser, activateUser1 ,activateUser, veriUser, rmoveUser };
+module.exports = { getAllUser, createUser, decodeUser, activateUser1 ,activateUser, veriUser, rmoveUser };

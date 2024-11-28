@@ -13,32 +13,43 @@
     <link rel="stylesheet" href="../css/registration.css">
   </head>
 
-  <!-- navbar -->
-    <div class="navbar_place"></div>
-
-    <div class="container d-flex justify-content-center align-items-center w-100 regiform">
-      <form id="regUserData" class="p-4 border rounded shadow">
-        <h2 id="form_title" class="text-center mb-5">Registration</h2>
-          <div class="alert alert-danger d-none" id="errorsuc_msg" role="alert">
-            A simple danger alert—check it out!
-          </div>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp">
-          </div>
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" id="exampleInputPassword1">
-          </div><br>
-          <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-
   <body>
+
+
+    
+  <!-- navbar -->
+  <div class="navbar_place"></div>
+
+  <div class="container d-flex justify-content-center align-items-center w-100 regiform">
+    <form id="regUserData" class="p-4 border rounded shadow">
+      <h2 id="form_title" class="text-center mb-5">Registration</h2>
+        <div class="alert alert-danger d-none" id="errorsuc_msg" role="alert">
+          A simple danger alert—check it out!
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp">
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div><br>
+        <button type="submit" class="btn btn-dark float-right">Submit</button><br><br><br>
+        <pre>I Have Already Account ! <a href="../web/login.html" class="text-decoration-none">Login Here</a> </pre>
+        <hr>
+        <div class="golcontainer d-flex justify-content-center align-items-center">
+          <div class="btn btn-outline-dark border rounded-pill" style="font-size: 1rem;"> <img src="../image/goolpic.png" width="45px" alt=""> Sign Up With Google </div>
+        </div>
+    </form>
+  </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.5/js.cookie.min.js" async defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="../js/registration.js" type="module"></script>

@@ -50,6 +50,16 @@ const userRegister = async (e) => {
                     $(this).fadeOut(4000);
                 })
             })
+            let userinfo = res?.udata?.tokens[res.udata.tokens.length -1].token.toString();
+            let seusecokkie = Cookies.set("ULD",userinfo,{expires : 1 , path: "/" ,SameSite: "Lax"});
+            if(seusecokkie) {
+                console.log("cookie is set");
+                console.log(Cookies.get("ULD"));
+            }
+            
+            setTimeout(()=>{
+                window.location = "http://127.0.0.1:5501/web/index.html"
+            },1500)
         }
     }
     else{
@@ -63,6 +73,7 @@ const userRegister = async (e) => {
     }
 
 }
+
 
 const regUserData = document.querySelector("#regUserData");
 regUserData.addEventListener("submit",userRegister)
