@@ -65,43 +65,48 @@ const createUser = async (req, res) => {
 
 const decodeUser = async (req,res) => {
    const {data} = await req.body
-   console.log(req.body);
-   console.log(data);
-   res.send({});
+   let decrypt_data = await jwt.verify(data , process.env.JWT_SEC_KEY);
+   const us_data = await user.findOne({_id : decrypt_data.id});
+   res.send({us_data});
 }
 
 const activateUser = async (req, res) => {
   const { verifyLink } = req.query;
-  const decodetoken = await jwt.verify(verifyLink, process.env.JWT_SEC_KEY);
-  // console.log(decodetoken);
-  const udata = await user.findByIdAndUpdate(
-    { _id: decodetoken.id },
-    { activation: true },
-    { new: true }
-  );
-  return res.redirect(`http://127.0.0.1:5500/blog/client/index.html?userData=${encodeURIComponent(JSON.stringify(udata))}`);
-  return res.send({ msg: `Account Activate Successfully.`, udata });
+  try {
+    const decodetoken = await jwt.verify(verifyLink, process.env.JWT_SEC_KEY);
+    // console.log(decodetoken);
+    const udata = await user.findByIdAndUpdate(
+      { _id: decodetoken.id },
+      { activation: true },
+      { new: true }
+    );
+    return res.redirect(`http://127.0.0.1:5500/blog/client/index.html?userData=${encodeURIComponent(JSON.stringify(udata))}`);
+    // return res.send({ msg: `Account Activate Successfully.`, udata });
+  } catch (error) {
+    return res.status(501).send({msg : "Database Error !"});
+  }
 };
 
 const veriUser = async (req, res) => {
-  const { email, password } = req.body;
-
+  let { email, password } = req.body;
   const data = await user.findOne({ email });
 
-  console.log("Stored password:", data.password);
-  console.log("Entered password:", password);
+try {
   if (data) {
     const chepass = await bcrypt.compare(password, data.password);
     console.log(chepass);
 
-    if (!chepass) {
-      return res.send({ msg: "Data invalid." });
-    }
+    // if (!chepass) {
+    //   return res.send({ msg: "Data invalid." });
+    // }
     const ltoken = await data.genAuthToken(); 
-    return res.send({ msg: "Login SeccessFully.", chepass , ltoken});
+    return res.status(201).send({ msg: "Login SuccessFully." , ltoken});
   } else {
-    console.log("data Not Founded");
+    return res.status(401).send({ msg: "User Not Founded !"});
   }
+} catch (error) {
+  return res.status(501).send({msg : "Database Error !"});
+}
 }; //! password Comparing Is not Work Properly ❌
 
   

@@ -20,10 +20,13 @@ const navbar = () => {
           <a class="nav-link" href="#">BlogDescription</a>
         </li>
         <li class="nav-item mr-2">
-          <a class="nav-link" href="#">Dashbord</a>
+          <a class="nav-link uname" href="#">Dashbord</a>
         </li>
         <li class="nav-item mr-2">
-          <a class="nav-link" href="../web/login.html">Login</a>
+          <a class="nav-link ulnav" href="../web/login.html">Login</a>
+        </li>
+        <li class="nav-item mr-2">
+          <a class="nav-link d-none ulonav" href="../web/login.html">Logout</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">

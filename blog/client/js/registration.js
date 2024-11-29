@@ -78,3 +78,15 @@ const userRegister = async (e) => {
 const regUserData = document.querySelector("#regUserData");
 regUserData.addEventListener("submit",userRegister)
 
+document.querySelector(".fa-lock").addEventListener("click",(e)=> {
+    e.preventDefault(); 
+    document.querySelector(".passicon").classList.toggle("fa-unlock");
+    
+    let clarr = document.querySelector(".passicon").getAttribute("class").split(" ");
+    if(clarr[clarr.length-1] == "fa-unlock"){
+        document.querySelector("#password").setAttribute("type","text");
+    }else{
+        document.querySelector("#password").setAttribute("type","password");
+    }
+})
+

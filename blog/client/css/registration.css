@@ -1,4 +1,5 @@
 *{
+    user-select: none;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,4 +7,16 @@
 
 .regiform{
     height: 90vh;
+}
+.passicon{
+    height: 0;
+    width:  0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 0.6rem ;
+    right: 1.3rem;
+}
+.passicon:hover{
+    cursor: pointer;
 }
