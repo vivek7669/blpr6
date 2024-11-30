@@ -1,4 +1,5 @@
 import navbar from "../helper/navbar.js";
+import port from "../port.js";
 
 
 let np = document.querySelector(".navbar_place");
@@ -26,9 +27,18 @@ const checkuser = async (e) => {
         const req = await fetch(url , option);
         const res = await req.json();
         
-        console.log(res);
+        // console.log(res);
         let msg = res?.msg;
         if(msg == "User Not Founded !"){
+            suer_msg.classList.remove("d-none");
+            $(document).ready(function(){
+                $("#errorsuc_msg").text(msg);
+                $("#errorsuc_msg").fadeIn(1000,function(){
+                    $(this).fadeOut(4000);
+                })
+            })
+        }
+        if(msg == "Data invalid."){
             suer_msg.classList.remove("d-none");
             $(document).ready(function(){
                 $("#errorsuc_msg").text(msg);
@@ -49,13 +59,13 @@ const checkuser = async (e) => {
             })
             let userinfo = res?.ltoken.toString();
             let seusecokkie = Cookies.set("ULD",userinfo,{expires : 1 , path: "/" ,SameSite: "Lax"});
-            if(seusecokkie) {
-                console.log("cookie is set");
-                console.log(Cookies.get("ULD"));
-            }
+            // if(seusecokkie) {
+            //     console.log("cookie is set");
+            //     console.log(Cookies.get("ULD"));
+            // }
             
             setTimeout(()=>{
-                window.location = "http://127.0.0.1:5501/web/index.html"
+                window.location = `http://127.0.0.1:${port}/web/index.html`
             },1500)
         }
     }
@@ -73,3 +83,15 @@ const checkuser = async (e) => {
 
 document.querySelector("#regUserData").addEventListener("submit",checkuser)
 
+
+document.querySelector(".fa-lock").addEventListener("click",(e)=> {
+    e.preventDefault(); 
+    document.querySelector(".passicon").classList.toggle("fa-unlock");
+    
+    let clarr = document.querySelector(".passicon").getAttribute("class").split(" ");
+    if(clarr[clarr.length-1] == "fa-unlock"){
+        document.querySelector("#password").setAttribute("type","text");
+    }else{
+        document.querySelector("#password").setAttribute("type","password");
+    }
+})

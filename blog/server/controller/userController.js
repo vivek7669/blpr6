@@ -1,7 +1,7 @@
 require("dotenv").config();
 const user = require("../model/user.schema");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 let option, link;
 
@@ -65,9 +65,13 @@ const createUser = async (req, res) => {
 
 const decodeUser = async (req,res) => {
    const {data} = await req.body
-   let decrypt_data = await jwt.verify(data , process.env.JWT_SEC_KEY);
-   const us_data = await user.findOne({_id : decrypt_data.id});
-   res.send({us_data});
+  try {
+    let decrypt_data = await jwt.verify(data , process.env.JWT_SEC_KEY);
+    const us_data = await user.findOne({_id : decrypt_data.id});
+    res.send({us_data});
+  } catch (error) {
+    return res.status(402).send({msg : "Not Valid Token !"});
+  }
 }
 
 const activateUser = async (req, res) => {
@@ -90,15 +94,14 @@ const activateUser = async (req, res) => {
 const veriUser = async (req, res) => {
   let { email, password } = req.body;
   const data = await user.findOne({ email });
-
+  
 try {
   if (data) {
     const chepass = await bcrypt.compare(password, data.password);
-    console.log(chepass);
-
-    // if (!chepass) {
-    //   return res.send({ msg: "Data invalid." });
-    // }
+    
+    if (!chepass) {
+      return res.send({ msg: "Data invalid." });
+    }
     const ltoken = await data.genAuthToken(); 
     return res.status(201).send({ msg: "Login SuccessFully." , ltoken});
   } else {
@@ -123,7 +126,7 @@ const activateUser1 = async (req, res) => {
   console.log(req.query);
   
   const data = await user.deleteMany({ email });
-  return res.send({ msg: "Data deleted.", data });
+  return res.send({ msg: "Active User.", data });
 };
 
 module.exports = { getAllUser, createUser, decodeUser, activateUser1 ,activateUser, veriUser, rmoveUser };

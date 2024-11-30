@@ -10,7 +10,9 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
   </head>
 
   <!-- navbar -->
@@ -28,8 +30,11 @@
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" id="exampleInputPassword1">
+            <div class="passcont d-flex">
+              <input type="password" id="password" name="password" class="form-control" id="exampleInputPassword1"> <i class="passicon fa-solid fa-lock"></i>
+            </div>
           </div><br>
+          <div class="g-recaptcha" data-sitekey="6LdUTY4qAAAAAJkXfm7I73yJNMSi8bN355fasqCr" ></div><br>
           <input type="submit" id="logbtn" class="logbtn btn btn-dark float-right" Value="Login" /><br><br>
           <pre>I Have Not Account ! <a href="../web/ragistration.html" class="text-decoration-none">SignUp Here</a> </pre>
           <hr>

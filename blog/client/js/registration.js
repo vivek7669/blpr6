@@ -1,4 +1,5 @@
 import navbar from "../helper/navbar.js";
+import port from "../port.js";
 
 
 let np = document.querySelector(".navbar_place");
@@ -58,7 +59,7 @@ const userRegister = async (e) => {
             }
             
             setTimeout(()=>{
-                window.location = "http://127.0.0.1:5501/web/index.html"
+                window.location = `http://127.0.0.1:${port}/web/index.html`
             },1500)
         }
     }

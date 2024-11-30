@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -10,8 +10,6 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    trim: true,
-    lowercase: true
   },
   email: {
     type: String,
@@ -51,7 +49,7 @@ const userSchema = new mongoose.Schema({
 userSchema.pre("save", async function (next) {
   try {
     if (this.isModified("password")) {
-      this.password = await bcrypt.hash(this.password, 10);
+      this.password = bcrypt.hash(this.password, 10);
     }
     next();
   } catch (error) {
