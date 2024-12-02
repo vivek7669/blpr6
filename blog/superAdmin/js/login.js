@@ -8,28 +8,16 @@ np.innerHTML = navbar();
 document.querySelector(".navbar-nav").classList.add('d-none');
 document.querySelector(".form-inline").classList.add('d-none');
 
-//formdata handling
-
-const userRegister = async (e) => {
+const checkuser = async (e) => {
     e.preventDefault();
-    var response = grecaptcha.getResponse();
-
-    // Check if the response is empty
-    if (response.length === 0) {
-        return;
-    }
-
-    // Collect other form data
     const data = {
-        username: document.querySelector("#username").value,
-        email: document.querySelector("#email").value,
-        password: document.querySelector("#password").value,
-        response: response  // This is the reCAPTCHA response token
-    };
-    // console.log(data);
+        email : document.querySelector("#email").value,
+        password : document.querySelector("#password").value
+    }
+    
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?=\S)(?!.*\s).{8,}$/;
     if(passRegex.test(data.password)){
-        const url = "http://localhost:8090/user/signup";
+        const url = "http://localhost:8090/superAdmin/login";
         const option = {
             method : "POST",
             headers : {"content-type" : "application/json"},
@@ -39,9 +27,9 @@ const userRegister = async (e) => {
         const req = await fetch(url , option);
         const res = await req.json();
         
-        console.log(res);
+        // console.log(res);
         let msg = res?.msg;
-        if(msg == "User Already Exist"){
+        if(msg == "User Not Founded !"){
             suer_msg.classList.remove("d-none");
             $(document).ready(function(){
                 $("#errorsuc_msg").text(msg);
@@ -50,7 +38,16 @@ const userRegister = async (e) => {
                 })
             })
         }
-        if(msg == "User Successfully Registerd."){
+        if(msg == "Data invalid."){
+            suer_msg.classList.remove("d-none");
+            $(document).ready(function(){
+                $("#errorsuc_msg").text(msg);
+                $("#errorsuc_msg").fadeIn(1000,function(){
+                    $(this).fadeOut(4000);
+                })
+            })
+        }
+        if(msg == "Login SuccessFully."){
             suer_msg.classList.remove("d-none");
             suer_msg.classList.remove("alert-danger");
             suer_msg.classList.add("alert-success");
@@ -60,14 +57,12 @@ const userRegister = async (e) => {
                     $(this).fadeOut(4000);
                 })
             })
-            let userinfo = res?.udata?.tokens[res.udata.tokens.length -1].token.toString();
-            console.log(userinfo);
-            
+            let userinfo = res?.ltoken.toString();
             let seusecokkie = Cookies.set("ULD",userinfo,{expires : 1 , path: "/" ,SameSite: "Lax"});
-            if(seusecokkie) {
-                console.log("cookie is set");
-                console.log(Cookies.get("ULD"));
-            }
+            // if(seusecokkie) {
+            //     console.log("cookie is set");
+            //     console.log(Cookies.get("ULD"));
+            // }
             
             setTimeout(()=>{
                 window.location = `http://127.0.0.1:${port}/web/index.html`
@@ -78,7 +73,7 @@ const userRegister = async (e) => {
         suer_msg.classList.remove("d-none");
         $(document).ready(function(){
             $("#errorsuc_msg").text("Enter Valid data !");
-            $("#errorsuc_msg").fadeIn(1000,function(){
+            $("#errorsuc_msg").slideDown(1000,function(){
                 $(this).fadeOut(4000);
             })
         })
@@ -86,9 +81,8 @@ const userRegister = async (e) => {
 
 }
 
+document.querySelector("#regUserData").addEventListener("submit",checkuser)
 
-const regUserData = document.querySelector("#regUserData");
-regUserData.addEventListener("submit",userRegister)
 
 document.querySelector(".fa-lock").addEventListener("click",(e)=> {
     e.preventDefault(); 
@@ -102,9 +96,4 @@ document.querySelector(".fa-lock").addEventListener("click",(e)=> {
     }
 })
 
-let guthnticte = document.querySelector(".guth");
-guthnticte.addEventListener("click",(e)=>{
-    e.preventDefault();
-    location.href = "http://localhost:8090/user/auth/google";
-})
 

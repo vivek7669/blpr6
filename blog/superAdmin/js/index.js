@@ -13,6 +13,14 @@ if (uata || uata !== null || uata !== undefined) {
   let udata = {
     data: uata,
   };
+  let msg = `<p>Please log in to continue.</p>`;
+  suer_msg.classList.remove("d-none");
+  $(document).ready(function () {
+    $("#errorsuc_msg").html(msg);
+    $("#errorsuc_msg").fadeIn(1000, function () {
+      $(this).fadeOut(19000);
+    });
+  });
   if (udata.data !== undefined) {
     document.querySelector(".ulnav").classList.add("d-none");
     document.querySelector(".ulonav").classList.remove("d-none");

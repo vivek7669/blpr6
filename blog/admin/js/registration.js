@@ -13,7 +13,17 @@ document.querySelector(".form-inline").classList.add('d-none');
 const userRegister = async (e) => {
     e.preventDefault();
     var response = grecaptcha.getResponse();
-
+    let formData = new FormData(e.target);
+    formData.append("response",response)
+    console.log(formData.get("role"));
+    
+    // console.log(formData);
+    // console.log(    formData.get("username"),
+    // formData.get("email"),
+    // formData.get("role"),
+    // formData.get("password"));
+    
+    
     // Check if the response is empty
     if (response.length === 0) {
         return;
@@ -21,15 +31,16 @@ const userRegister = async (e) => {
 
     // Collect other form data
     const data = {
-        username: document.querySelector("#username").value,
-        email: document.querySelector("#email").value,
-        password: document.querySelector("#password").value,
-        response: response  // This is the reCAPTCHA response token
+        username: formData.get("username"),
+        email: formData.get("email"),
+        role : formData.get("role"),
+        password: formData.get("password"),
+        response: formData.get("response")  
     };
     // console.log(data);
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?=\S)(?!.*\s).{8,}$/;
-    if(passRegex.test(data.password)){
-        const url = "http://localhost:8090/user/signup";
+    if(passRegex.test(formData.get("password"))){
+        const url = "http://localhost:8090/admin/signup";
         const option = {
             method : "POST",
             headers : {"content-type" : "application/json"},
@@ -102,9 +113,4 @@ document.querySelector(".fa-lock").addEventListener("click",(e)=> {
     }
 })
 
-let guthnticte = document.querySelector(".guth");
-guthnticte.addEventListener("click",(e)=>{
-    e.preventDefault();
-    location.href = "http://localhost:8090/user/auth/google";
-})
 

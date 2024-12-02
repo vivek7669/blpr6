@@ -95,3 +95,11 @@ document.querySelector(".fa-lock").addEventListener("click",(e)=> {
         document.querySelector("#password").setAttribute("type","password");
     }
 })
+
+
+let guthnticte = document.querySelector(".guth");
+guthnticte.addEventListener("click",async(e)=>{
+    e.preventDefault();
+    location.href = "http://localhost:8090/user/auth/google"
+})
+

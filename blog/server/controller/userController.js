@@ -26,21 +26,14 @@ const getAllUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { username, password, email } = req.body;
-
+  const { username, password, email , response } = req.body;
+    
   try {
     let isExist = await user.findOne({ email });
 
-    if (isExist || isExist != null)
-      return res.send({ msg: "User Already Exist" }); // redirecting to login page...
-    data = {
-        username,
-        password : await bcrypt.hash(password,10),
-        email
-    }
-    // console.log(data.password);
+    if (isExist || isExist != null) return res.send({ msg: "User Already Exist" }); // redirecting to login page...
     
-    let udata = await user.create(data);
+    let udata = await user.create(req.body);
     let genToken = await udata.genAuthToken();
 
     link = `<a href="http://localhost:8090/user/activation/?verifyLink=${genToken}">Go To Your Dashbord And Active Your Accont</a>`;
@@ -128,5 +121,6 @@ const activateUser1 = async (req, res) => {
   const data = await user.deleteMany({ email });
   return res.send({ msg: "Active User.", data });
 };
+
 
 module.exports = { getAllUser, createUser, decodeUser, activateUser1 ,activateUser, veriUser, rmoveUser };

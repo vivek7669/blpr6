@@ -15,16 +15,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
     lowercase: true,
-    validate : {
-      validator : function(value){
+    unique: true,
+    validate: {
+      validator: function (value) {
         return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
       },
-    message : "Please enter a valid email address."
-    }
+      message: "Please enter a valid email address.",
+    },
   },
   role: {
     type: String,
-    enum: ["user", "admin"],
+    enum: ["user", "admin","superAdmin"],
     default: "user",
   },
   activation: {
@@ -33,7 +34,7 @@ const userSchema = new mongoose.Schema({
   },
   blogIds: [
     {
-      blogId : String,
+      blogId: String,
     },
   ],
   otp: {
@@ -49,7 +50,7 @@ const userSchema = new mongoose.Schema({
 userSchema.pre("save", async function (next) {
   try {
     if (this.isModified("password")) {
-      this.password = bcrypt.hash(this.password, 10);
+      this.password = await bcrypt.hash(this.password, 10);
     }
     next();
   } catch (error) {
