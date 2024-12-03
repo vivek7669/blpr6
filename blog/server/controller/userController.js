@@ -25,6 +25,15 @@ const getAllUser = async (req, res) => {
   }
 };
 
+const getAlladm = async (req, res) => {
+  try {
+    let data = await user.find({role : "admin"});
+    return res.send({ data });
+  } catch (error) {
+    return res.send({ err: error });
+  }
+};
+
 const createUser = async (req, res) => {
   const { username, password, email , response } = req.body;
     
@@ -103,10 +112,7 @@ try {
 } catch (error) {
   return res.status(501).send({msg : "Database Error !"});
 }
-}; //! password Comparing Is not Work Properly ❌
-
-  
-  
+};
   
 const rmoveUser = async (req, res) => {
   const { email } = req.params;
@@ -122,5 +128,21 @@ const activateUser1 = async (req, res) => {
   return res.send({ msg: "Active User.", data });
 };
 
+const verifyAdm = async (req,res) => {
+  const {id} = req.body ;
+  console.log(req.body);
+  
+    console.log(id);
+    
+  try {
+    const data = await user.findByIdAndUpdate({_id:id},{verify : true},{new : true});
+    
+    //? send Mail For Admin his Account Is Verified...
 
-module.exports = { getAllUser, createUser, decodeUser, activateUser1 ,activateUser, veriUser, rmoveUser };
+    res.status(201).send({msg:"Verified SuccessFlly" , data});
+  } catch (error) {
+    res.status(501).send({msg:"Verified Not SuccessFlly" , error});
+  }
+}
+
+module.exports = { getAllUser, getAlladm , createUser, decodeUser, activateUser1 ,activateUser, veriUser, rmoveUser, verifyAdm };
