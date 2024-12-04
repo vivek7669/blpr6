@@ -1,5 +1,5 @@
 const {Router} = require("express");
-const { getAllUser , getAlladm , verifyAdm , createUser, decodeUser , activateUser ,activateUser1, veriUser ,rmoveUser } = require("../controller/userController");
+const { getAllUser , getAlladm , verifyAdm , createUser, decodeUser , activateUser ,activateUser1, veriUser ,rmoveUser, getAllusr } = require("../controller/userController");
 const {checkdata, checkdata1 } = require("../middleware/checkBody");
 const validateToken = require("../middleware/expiToken");
 const passport = require("passport");
@@ -8,6 +8,7 @@ const userRoute = Router();
 
 userRoute.get("/",getAllUser);
 userRoute.get("/adm",getAlladm);
+userRoute.get("/usr",getAllusr);
 userRoute.get("/activation/",activateUser);
 userRoute.post("/activation/",activateUser1);
 userRoute.post("/adm/verify",verifyAdm);

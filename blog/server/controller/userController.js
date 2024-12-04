@@ -34,6 +34,15 @@ const getAlladm = async (req, res) => {
   }
 };
 
+const getAllusr = async (req, res) => {
+  try {
+    let data = await user.find({role : "user"});
+    return res.send({ data });
+  } catch (error) {
+    return res.send({ err: error });
+  }
+};
+
 const createUser = async (req, res) => {
   const { username, password, email , response } = req.body;
     
@@ -130,19 +139,27 @@ const activateUser1 = async (req, res) => {
 
 const verifyAdm = async (req,res) => {
   const {id} = req.body ;
-  console.log(req.body);
-  
-    console.log(id);
-    
+
   try {
     const data = await user.findByIdAndUpdate({_id:id},{verify : true},{new : true});
     
-    //? send Mail For Admin his Account Is Verified...
+    console.log(data.username);
+    
+    const option = {
+      from : "chauhanvivek0918@gmail.com",
+      to : data.email,
+      subject : "Admin Verification",
+      html : "<h4>Your Account Is Verified. 😊</h4>"
+    }
 
-    res.status(201).send({msg:"Verified SuccessFlly" , data});
+    const sendmailop = transport.sendMail(option,(err,info)=>{
+      if(err) return res.send({msg:"Email Verification Time Occured Error." , err})
+       console.log(info);
+    })
+    return res.status(201).send({msg:"Verified SuccessFlly" , data});
   } catch (error) {
     res.status(501).send({msg:"Verified Not SuccessFlly" , error});
   }
 }
 
-module.exports = { getAllUser, getAlladm , createUser, decodeUser, activateUser1 ,activateUser, veriUser, rmoveUser, verifyAdm };
+module.exports = { getAllUser,getAllusr, getAlladm , createUser, decodeUser, activateUser1 ,activateUser, veriUser, rmoveUser, verifyAdm };

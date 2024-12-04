@@ -41,7 +41,6 @@ if (uata || uata !== null || uata !== undefined) {
         document.querySelector(".email").textContent = res?.us_data?.email;
         document.querySelector(".role").textContent = res?.us_data?.role;
         document.querySelector(".activation").textContent = res?.us_data?.activation;
-
         
         const url0 = "http://localhost:8090/user/adm";
         const option0 = {
