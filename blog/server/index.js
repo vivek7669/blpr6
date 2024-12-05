@@ -12,6 +12,8 @@ const userRoute = require('./routers/userRouter');
 const BloagRoute = require('./routers/bloagRoutes');
 const user = require("./model/user.schema");
 const initalization = require("./services/goInalize");
+const path = require("path");
+
 
 const app = express();
 const port = process.env.PORT || 3040 ;
@@ -23,6 +25,7 @@ app.use(session({
     saveUninitialized : false
 }))
 initalization(passport);
+app.use("/blog/uploads",express.static(path.join((__dirname , "./uploads"))))
 app.use(passport.session());
 app.use(passport.initialize());
 

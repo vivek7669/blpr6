@@ -1,25 +1,16 @@
 import navbar from "../helper/navbar.js";
+import sibar from "../helper/sidebar.js";
 
 const urlParams = new URLSearchParams(window.location.search);
 
 let np = document.querySelector(".navbar_place");
-let suer_msg = document.querySelector("#errorsuc_msg");
+let sbp = document.querySelector(".sidebar_place");
+// let suer_msg = document.querySelector("#errorsuc_msg");
 // let msg = `<p>Your Email is Not Verifed Then Fist Your Verify Your Email After Use Advance Services , Your Gmail <a href="https://mail.google.com/mail/${email}">${email}</a></p>`;
 np.innerHTML = navbar();
+sbp.innerHTML = sibar();
 
 let uata = Cookies.get("ULD");
-
-if(uata == undefined){
-  let msg = `<p>Please log in to continue.</p>`;
-  suer_msg.classList.remove("d-none");
-  //? login not or registerd
-  $(document).ready(function () {
-    $("#errorsuc_msg").html(msg);
-    $("#errorsuc_msg").fadeIn(1000, function () {
-      $(this).fadeOut(19000);
-    });
-  });
-}
 
 if (uata || uata !== null || uata !== undefined) {
   let udata = {
@@ -43,6 +34,13 @@ if (uata || uata !== null || uata !== undefined) {
       console.log(res);
       // console.log(res.us_data.activation); //!work in Progressive... 😦🤖👁
       document.querySelector(".uname").textContent = res?.us_data?.username;
+      document.querySelector(".username").textContent = res?.us_data?.username;
+      document.querySelector(".email").textContent = res?.us_data?.email;
+      document.querySelector(".role").textContent = res?.us_data?.role;
+      document.querySelector(".activation").textContent =
+        res?.us_data?.activation;
+      document.querySelector(".verified").textContent = res?.us_data?.verify;
+
       if (res?.us_data?.activation) {
         // user dashbord on show data and use all services
       } else if (
@@ -50,7 +48,7 @@ if (uata || uata !== null || uata !== undefined) {
         res?.msg == "Not Valid Token !"
       ) {
         $(document).ready(function () {
-          suer_msg.classList.remove("d-none");
+          //   suer_msg.classList.remove("d-none");
           let msg = `<p>Please Login And Verify Your Account !</p>`;
           $("#errorsuc_msg").html(msg);
           $("#errorsuc_msg").fadeIn(1000, function () {
@@ -63,7 +61,7 @@ if (uata || uata !== null || uata !== undefined) {
         }, 1500);
       } else {
         $(document).ready(function () {
-          suer_msg.classList.remove("d-none");
+          //   suer_msg.classList.remove("d-none");
           let msg = `<p>Your Account Is Not Active Then You Account Verfiy Link Send On Your Email Just Verify to Click On <a href="https://mail.google.com/mail/${res?.us_data?.email}">${res?.us_data?.email}</a></p>`;
           $("#errorsuc_msg").html(msg);
           $("#errorsuc_msg").fadeIn(1000, function () {
@@ -92,7 +90,6 @@ if (uata || uata !== null || uata !== undefined) {
   //         $(this).fadeOut(19000);
   //     })
   // })
-
   let msg = `<p>Please log in to continue.</p>`;
   suer_msg.classList.remove("d-none");
   //? login not or registerd
@@ -107,3 +104,19 @@ if (uata || uata !== null || uata !== undefined) {
 document.querySelector(".ulonav").addEventListener("click", () => {
   Cookies.remove("ULD");
 });
+
+// console.log(document.querySelector(".clicked"))
+$(document).ready(function () {
+    $(".dropdown-toggle").on("click", function () {
+      if ($(this).hasClass("clicked")) {
+        $(this).removeClass("clicked");
+        $(".dropdown-menu").slideUp(150);
+        $(this).css("margin-bottom", "0rem");
+      } else {
+        $(this).addClass("clicked");
+        $(".dropdown-menu").slideDown(250);
+        $(this).css("margin-bottom", "7rem");
+      }
+    });
+  });
+  

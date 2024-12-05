@@ -11,14 +11,29 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const getAllBloag = async (req, res) => {
-  const data = await blpost.find();
+  try {
+    const data = await blpost.find().populate('author');
+    res.send({ data });
+  } catch (error) {
+    res.send({error})
+  }
+};
+
+const getAllBloagBuuid = async (req, res) => {
+try {
+  let {id} = req.params 
+  const data = await blpost.find({author : id});
   res.send({ data });
+} catch (error) {
+  res.send({error})
+}
 };
 
 const genBloag = async (req, res) => {
-  const { title, content, category } = req.body;
+  const { title, content, category ,author } = req.body;
+  
   try {
-    let data = { title, content, category, image: req.file.path };
+    let data = { title, content, category, image: req.file.path , author};
 
     const bdata = await blpost.create(data);
     console.log(bdata);
@@ -57,4 +72,4 @@ const ModifyBloag = async (req,res) => {
     }
 }
 
-module.exports = { getAllBloag, genBloag, removeBloag, ModifyBloag, upload };
+module.exports = { getAllBloag, getAllBloagBuuid, genBloag, removeBloag, ModifyBloag, upload };

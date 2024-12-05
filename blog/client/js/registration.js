@@ -103,7 +103,7 @@ document.querySelector(".fa-lock").addEventListener("click",(e)=> {
 })
 
 let guthnticte = document.querySelector(".guth");
-guthnticte.addEventListener("click",(e)=>{
+guthnticte?.addEventListener("click",(e)=>{
     e.preventDefault();
     location.href = "http://localhost:8090/user/auth/google";
 })

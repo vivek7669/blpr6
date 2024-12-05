@@ -9,27 +9,19 @@ const bpostSchema = new mongoose.Schema({
   content: {
     type: String,
     trim: true,
-    lowercase: true,
   },
   image: {
     type: String,
   },
   author: {
-    type: String,
-    trim: true,
-    lowercase: true,
+    type: mongoose.Schema.Types.ObjectId ,
+    ref : "user" 
   },
   category: {
     type: String,
   },
-  likedBy: [{ username: String }],
-  comments: [
-    {
-      text: String,
-      username: String,
-      date: { type: Date, default: Date.now },
-    },
-  ],
+  likedBy: [{ type : mongoose.Schema.ObjectId , ref : "like" }],
+  comments: [{ type : mongoose.Schema.ObjectId  , ref : "comment"}],
 });
 
 const blpost = mongoose.model("blpost", bpostSchema);

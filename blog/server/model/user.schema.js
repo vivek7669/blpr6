@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
   },
   blogIds: [
     {
-      blogId: String,
+      type : mongoose.Schema.ObjectId , ref : "blpost" , required : true
     },
   ],
   otp: {
@@ -73,7 +73,7 @@ userSchema.methods.genAuthToken = async function () {
     await this.save();
     return token;
   } catch (error) {
-    return console.log(error);
+    return console.log(`${msg} : `,error);
   }
 };
 

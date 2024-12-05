@@ -15,8 +15,7 @@ async function validateToken(req, res, next) {
     if (!data) {
         return res.status(401).send({ error: 'Token Expired' });
     }
-    
-    // Filter out expired tokens
+      // Filter out expired tokens
     data.tokens = data.tokens.filter((t) => {
       try {
         jwt.verify(t.token, process.env.JWT_SEC_KEY);
