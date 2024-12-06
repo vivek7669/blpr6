@@ -18,7 +18,9 @@ const transport = nodemailer.createTransport({
 
 const getAllUser = async (req, res) => {
   try {
-    let data = await user.find().populate("blogIds");
+    let data = await user.find().populate('blogIds');
+    console.log(data);
+    
     return res.send({ data });
   } catch (error) {
     return res.send({ err: error });
@@ -104,6 +106,8 @@ const activateUser = async (req, res) => {
 
 const veriUser = async (req, res) => {
   let { email, password } = req.body;
+  console.log(email);
+  
   const data = await user.findOne({ email });
   
 try {

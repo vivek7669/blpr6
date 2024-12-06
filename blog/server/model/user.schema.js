@@ -38,8 +38,8 @@ const userSchema = new mongoose.Schema({
   },
   blogIds: [
     {
-      type : mongoose.Schema.ObjectId , ref : "blpost" , required : true
-    },
+      type : mongoose.Schema.Types.ObjectId , ref : "blpost" , required : true
+    }
   ],
   otp: {
     type: String,
