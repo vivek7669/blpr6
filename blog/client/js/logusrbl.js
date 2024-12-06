@@ -46,73 +46,140 @@ if (uata || uata !== null || uata !== undefined) {
       let res = req ? await req.json() : await console.log("no Response");
       console.log(res);
 
-      if(res.error == "Please authenticate")
-      {
+      if (res.error == "Please authenticate") {
         Cookies.remove();
-        location.href = "../web/index.html"
+        location.href = "../web/index.html";
       }
 
       usId = res?.us_data?._id;
       // console.log(res.us_data.activation); //!work in Progressive... 😦🤖👁
       document.querySelector(".uname").textContent = res?.us_data?.username;
 
-      const url1 = `http://localhost:8090/blog/${usId}`;
+      const url1 = `http://localhost:8090/blog/usr/${usId}`;
       const option1 = {
         method: "GET",
       };
       let req1 = await fetch(url1, option1);
       let res1 = req1 ? await req1.json() : await console.log("no Response");
       console.log(res1.data);
-      console.log(`http://localhost:8090/blog/${res1?.data[0].image}`);
+      // console.log(`http://localhost:8090/blog/${res1?.data[0].image}`);
 
       let bldis = document.querySelector(".blogDisplce");
       bldis.innerHTML = "";
-      
+
       res1.data.map(
-        ({ author, category, comments, content, image, likedBy, title }) => {
-            let blCard = document.createElement("div");
-            blCard.classList.add("card", "mx-2", "mb-3");
+        ({
+          _id,
+          author,
+          category,
+          comments,
+          content,
+          image,
+          likedBy,
+          title,
+        }) => {
+          let blCard = document.createElement("div");
+          blCard.classList.add("card", "mx-2", "mb-3", "w-25");
+          let imcont = document.createElement("div");
+          imcont.style.height = "140px";
+          imcont.style.overflow = "hidden";
+          imcont.classList.add("w-100");
+          let uimg = document.createElement("img");
+          uimg.src = `http://localhost:8090/blog/${image}`;
+          uimg.classList.add("align-self-center", "m-2");
+          uimg.setAttribute("width", "250px");
 
-            let uimg = document.createElement("img");
-            uimg.src = `http://localhost:8090/blog/${image}`;
-            uimg.classList.add("align-self-center","m-2");
-            uimg.setAttribute("width","280px")
+          imcont.append(uimg);
 
-            let cbody = document.createElement("div");
-            cbody.classList.add("card-body");
+          let cbody = document.createElement("div");
+          cbody.classList.add("card-body");
 
-            let ctitle = document.createElement("h5");
-            ctitle.classList.add("card-title");
-            ctitle.textContent = title
-            let ctext = document.createElement("p");
-            ctext.classList.add("card-text");
-            ctext.textContent = category;
-          
-            let actbtn = document.createElement("div");
-            actbtn.classList.add("action_btn","float-right");
-            let bledit = document.createElement("a");
-            bledit.setAttribute("href","");
-            bledit.classList.add("badge","badge-pill","badge-success","mx-1");
-            bledit.style = "font-size: 1.1rem;"
+          let ctitle = document.createElement("h5");
+          ctitle.setAttribute("id", `ctit${_id}`);
+          ctitle.classList.add("card-title");
+          ctitle.textContent = title;
+          let ctext = document.createElement("p");
+          ctext.setAttribute("id", `ctxt${_id}`);
+          ctext.classList.add("card-text");
+          ctext.textContent = category;
 
-            let logo1 = document.createElement("i");
-            logo1.classList.add("fa-solid","fa-file-pen")
-            bledit.append(logo1)
+          let conOfu = document.createElement("pre");
+          conOfu.classList.add("card-text");
+          conOfu.textContent = content;
+          conOfu.style.textIndent = "1.5rem";
 
-            let delbtn = document.createElement("a");
-            delbtn.setAttribute("href","");
-            delbtn.classList.add("class","badge","badge-pill","badge-danger","mx-1");
-            delbtn.style = "font-size: 1.1rem;"
+          let actbtn = document.createElement("div");
+          actbtn.classList.add("action_btn", "float-right");
+          let bledit = document.createElement("a");
+          bledit.setAttribute("href", `../web/modiBlog.html?modId=${_id}`);
+          bledit.classList.add("badge", "badge-pill", "badge-success", "mx-1");
+          bledit.style = "font-size: 1.1rem;";
 
-            let logo2 = document.createElement("i");
-            logo2.classList.add("fa-solid","fa-trash-can")
-            delbtn.append(logo2)
+          let logo1 = document.createElement("i");
+          logo1.classList.add("fa-solid", "fa-file-pen");
+          bledit.append(logo1);
 
-            actbtn.append(bledit , delbtn)
-            cbody.append(ctitle,ctext,actbtn);
-            blCard.append(uimg,cbody);
+          let delbtn = document.createElement("a");
+          // delbtn.setAttribute("href","");
+          delbtn.classList.add(
+            "btn",
+            `popup-btn_${_id}`,
+            "badge",
+            "badge-pill",
+            "badge-danger",
+            "mx-1",
+            "text-light"
+          );
+          delbtn.style = "font-size: 1.1rem;";
 
-            bldis.append(blCard)
+          let logo2 = document.createElement("i");
+          logo2.classList.add("fa-solid", "fa-trash-can");
+          delbtn.append(logo2);
+
+          actbtn.append(bledit, delbtn);
+          cbody.append(ctitle, ctext, conOfu, actbtn);
+          blCard.append(imcont, cbody);
+
+          bldis.append(blCard);
+
+          $(document).ready(function () {
+            $(`.popup-btn_${_id}`).click(async function (e) {
+              let data = `.popup-btn_${_id}`;
+              let id = data.split("_");
+              document.querySelector(".delTitle").textContent =
+                document.querySelector(`#ctit${_id}`).textContent;
+              document.querySelector(".delContent").textContent =
+                document.querySelector(`#ctxt${_id}`).textContent;
+              $(".popup-wrap").fadeIn(500);
+              $(".popup-box")
+                .removeClass("transform-out")
+                .addClass("transform-in");
+
+              e.preventDefault();
+
+              document.querySelector(".delbtn").addEventListener("click",async(e)=>{
+                e.preventDefault();
+                const url2 = `http://localhost:8090/blog/delete/${id[1]}`;
+                const option2 = {
+                  method: "DELETE",
+                };
+                let req = await fetch(url2 , option2);
+                let res = await req.json();
+                console.log(res.msg);
+                location.reload();
+              })
+
+            });
+
+            $(".popup-close").click(function (e) {
+              $(".popup-wrap").fadeOut(500);
+              $(".popup-box")
+                .removeClass("transform-in")
+                .addClass("transform-out");
+
+              e.preventDefault();
+            });
+          });
         }
       );
 
@@ -179,4 +246,18 @@ if (uata || uata !== null || uata !== undefined) {
 
 document.querySelector(".ulonav").addEventListener("click", () => {
   Cookies.remove("ULD");
+});
+
+$(document).ready(function () {
+  $(".dropdown-toggle").on("click", function () {
+    if ($(this).hasClass("clicked")) {
+      $(this).removeClass("clicked");
+      $(".dropdown-menu").slideUp(150);
+      $(this).css("margin-bottom", "0rem");
+    } else {
+      $(this).addClass("clicked");
+      $(".dropdown-menu").slideDown(250);
+      $(this).css("margin-bottom", "7rem");
+    }
+  });
 });

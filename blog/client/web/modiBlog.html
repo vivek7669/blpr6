@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/modiBlog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+  </head>
+  
+  <body>
+    
+    
+    
+    <!-- navbar -->
+    <div class="navbar_place"></div>
+
+    <div class="sidebar_place"></div>
+    
+    <div class="container d-flex justify-content-center align-items-center w-100 regiform my-2">
+    <form id="regBloData" class="p-4 border rounded shadow" enctype="multipart/form-data">
+      <h2 id="form_title" class="text-center mb-5">Modify Blog</h2><hr>
+      <div class="alert alert-danger d-none" id="errorsuc_msg" role="alert">
+        A simple danger alert—check it out!
+      </div>
+      <div class="form-group">
+        <label for="title">title</label>
+        <input type="text" class="form-control" id="title" name="title" aria-describedby="usernameHelp">
+      </div>
+      <div class="form-group">
+        <label for="content">content</label>
+        <textarea class="form-control" id="content" name="content" aria-describedby="emailHelp"></textarea>
+      </div>
+      <img src="" class="img-fluid rounded" id="usimg" width="150" alt="">
+      <input type="text" name="ubimg" style="visibility: hidden;" id="ubimg" readonly />
+      <div class="form-group">
+        <label for="image">image</label>
+        <input type="file" id="image" name="image" class="form-control" id="exampleInputPassword1">
+      
+        <label for="category">category</label>
+        <input type="text" id="category" name="category" class="form-control" id="exampleInputPassword1">
+        
+      </div><br>
+      <div class="g-recaptcha" data-sitekey="6LdUTY4qAAAAAJkXfm7I73yJNMSi8bN355fasqCr" ></div><br>
+      <div class="row">
+        <div class="col-6"><a type="submit" class="btn btn-danger text-light float-left" href="../web/logusrbl.html">Cancel</a></div>
+        <div class="col-6"><button type="submit" class="btn btn-success float-right">Genrate</button></div>
+      </div><br>   
+
+    </form>
+  </div>
+  
+  
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.5/js.cookie.min.js" async defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+      document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    }
+    
+    function closeNav() {
+    document.querySelector(".dropdown-toggle").classList.remove("clicked");
+        $(".dropdown-menu").slideUp(100);
+        $(".dropdown-toggle").css("margin-bottom", "0rem");
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+      document.body.style.backgroundColor = "white";
+    }
+</script>
+  
+  <script src="../js/modiBlog.js" type="module"></script>
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script> -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
