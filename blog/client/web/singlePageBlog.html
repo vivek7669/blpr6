@@ -1,0 +1,146 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Grid Layout</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/singlePageBlog.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Sticky Navbar -->
+<nav class="navbar_place navbar-expand-lg navbar-light fixed-top" style="background-color: #333;"></nav>
+
+<div class="alert alert-warning d-none p-o m-0 positon-sticky" style="z-index: 1;" id="errorsuc_msg" role="alert">
+    A simple danger alert—check it out!
+</div>
+
+<!-- Hero Section with Image and Caption -->
+<header class="hero-section">
+    <div class="hero-image d-flex  align-items-center">
+        <div class="hero-caption">
+            <h1 class="text-left ml-5">Welcome to Our Blog</h1>
+            <p class="text-left ml-4">Stay updated with the latest articles on web development, design, and technology.</p>
+        </div>
+    </div>
+</header>
+
+
+<!-- Blog Grid Section -->
+<div class="container my-5">
+        <div class="blog-card">
+            <img src="" class="card-img-top" alt="Blog Thumbnail">
+            <div class="card-body">
+                <span class="badge badge-primary mb-2">Design</span>
+                <h5 class="card-title">Mastering Flexbox for Layouts</h5>
+                <p class="card-text">A deep dive into Flexbox and how it can make your web layouts more dynamic...</p>
+                <div class="meta d-flex justify-content-between">
+                    <span class="author">By Jane Smith</span>
+                    <div class="likes-comments">
+                        <i class="fa fa-heart"></i> <span class="like-count">89</span>
+                        <span><i class="fa fa-comments"></i> 30</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Add More Blog Cards... -->
+    </div>
+
+    <!-- Comments Section -->
+    <div class="container comments-section bg-light p-4 rounded d-flex justify-content-center">
+        <div class="w-50 ">
+            <h3>Leave a Comment</h3>
+        <form>
+            <input type="text" class="form-control mb-2" placeholder="Your Name" required>
+            <input type="email" class="form-control mb-2" placeholder="Your Email" required>
+            <textarea class="form-control mb-2" placeholder="Your Comment" rows="4" required></textarea>
+            <button type="submit" class="btn btn-primary float-right">Post Comment</button>
+        </form>
+        </div>
+    </div>
+
+    <!-- Related Blogs -->
+    <div class="container related-blogs mt-5">
+        <h3>Related Blogs</h3>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card" style="overflow: hidden;">
+                    <img src="" class="card-img-top" alt="Related Blog">
+                    <div class="card-body">
+                        <h5 class="card-title">JavaScript Essentials</h5>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat for other related blogs -->
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container">
+        <div class="row text-center">
+            <!-- Column 1: Blog Info and Contact -->
+            <div class="col-md-4">
+                <h4>About Us</h4>
+                <p>We are passionate about providing insightful and high-quality content for web developers, designers, and technology enthusiasts. Join us in exploring the latest trends!</p>
+                <h5>Contact Info</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Main St, City, Country</li>
+                    <li><i class="fas fa-phone-alt"></i> +1 (800) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> contact@blog.com</li>
+                </ul>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="col-md-4">
+                <h4>Quick Links</h4>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white">Home</a></li>
+                    <li><a href="#" class="text-white">About</a></li>
+                    <li><a href="#" class="text-white">Blog</a></li>
+                    <li><a href="#" class="text-white">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Social Media Links -->
+            <div class="col-md-4">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="row mt-4">
+            <div class="col text-center">
+                <p>&copy; 2024 Blog. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Bootstrap JS, Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.5/js.cookie.min.js" async defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="../js/singlePageBlog.js" type="module"></script>
+</body>
+</html>

@@ -12,19 +12,19 @@ document.querySelector(".form-inline").classList.add('d-none');
 
 const userRegister = async (e) => {
     e.preventDefault();
-    var response = grecaptcha.getResponse();
+    // var response = grecaptcha.getResponse();
 
     // Check if the response is empty
-    if (response.length === 0) {
-        return;
-    }
+    // if (response.length === 0) {
+    //     return;
+    // }
 
     // Collect other form data
     const data = {
         username: document.querySelector("#username").value,
         email: document.querySelector("#email").value,
         password: document.querySelector("#password").value,
-        response: response  // This is the reCAPTCHA response token
+        // response: response  // This is the reCAPTCHA response token
     };
     // console.log(data);
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?=\S)(?!.*\s).{8,}$/;

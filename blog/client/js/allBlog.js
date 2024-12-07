@@ -75,11 +75,118 @@ if (uata || uata !== null || uata !== undefined) {
     iifi();
   }
 
-  let blpace = document.querySelector(".bloag_list");
-  let url1 = ""
+  let url1 = "http://localhost:8090/blog/"
   let option1 = {
-    
+    method : "GET"
   }
+  
+  let req = await fetch(url1,option1);
+  let res = await req.json();
+  console.log(res);
+  
+  let blpace = document.querySelector(".bloag_list");
+  blpace.innerHTML = '';
+  res.data.map(({_id,author ,category ,content , image ,likedBy,title})=>{
+    // console.log(likedBy.length);
+    
+    let blCard = document.createElement("a");
+    blCard.href= `../web/singlePageBlog.html?sinBlId=${_id}`
+    blCard.classList.add("card", "mx-2", "mb-3", "w-25" ,"text-decoration-none","text-dark");
+    let imcont = document.createElement("div");
+    imcont.style.height = "140px";
+    imcont.style.overflow = "hidden";
+    imcont.classList.add("w-100");
+    let uimg = document.createElement("img");
+    uimg.src = `http://localhost:8090/blog/${image}`;
+    uimg.classList.add("align-self-center", "m-2");
+    uimg.setAttribute("width", "250px");
+  
+    imcont.append(uimg);
+  
+    let cbody = document.createElement("div");
+    cbody.classList.add("card-body");
+  
+    let ctitle = document.createElement("h5");
+    ctitle.setAttribute("id", `ctit${_id}`);
+    ctitle.classList.add("card-title");
+    ctitle.textContent = title;
+
+    let likeContainer = document.createElement("div");
+    likeContainer.classList.add("d-flex","flex-column","justify-content-center","align-items-end"); 
+
+    let likeNyUser = document.createElement("i");
+    likeNyUser.classList.add("fa-regular","fa-heart","float-right","display-block");
+    likeNyUser.style.fontSize= "1rem";
+    let likeCount = document.createElement("h5");
+    likeCount.classList.add("float-right","display-inline");
+    likeCount.style.fontSize= "1rem";
+    likeCount.style.margin= "0 0.2rem 0 0";
+    likeCount.textContent = likedBy.length;
+
+    likeContainer.append(likeNyUser,likeCount);
+
+    let ctext = document.createElement("p");
+    ctext.setAttribute("id", `ctxt${_id}`);
+    ctext.classList.add("card-text");
+    ctext.textContent = category;
+  
+    let conOfu = document.createElement("pre");
+    conOfu.classList.add("card-text");
+    conOfu.textContent = content;
+    conOfu.style.textIndent = "1.5rem";
+  
+    let blAuth = document.createElement("pre");
+    blAuth.style.fontWeight = "600";
+    blAuth.classList.add("card-text","float-right");
+    blAuth.textContent = `-${author?.username}`
+
+    cbody.append(ctitle ,likeContainer, ctext, conOfu,blAuth);
+    blCard.append(imcont, cbody);
+  
+    blpace.append(blCard);
+  
+    $(document).ready(function () {
+      $(`.popup-btn_${_id}`).click(async function (e) {
+        let data = `.popup-btn_${_id}`;
+        let id = data.split("_");
+        document.querySelector(".delTitle").textContent =
+          document.querySelector(`#ctit${_id}`).textContent;
+        document.querySelector(".delContent").textContent =
+          document.querySelector(`#ctxt${_id}`).textContent;
+        $(".popup-wrap").fadeIn(500);
+        $(".popup-box")
+          .removeClass("transform-out")
+          .addClass("transform-in");
+  
+        e.preventDefault();
+  
+        document.querySelector(".delbtn").addEventListener("click",async(e)=>{
+          e.preventDefault();
+          const url2 = `http://localhost:8090/blog/delete/${id[1]}`;
+          const option2 = {
+            method: "DELETE",
+          };
+          let req = await fetch(url2 , option2);
+          let res = await req.json();
+          console.log(res.msg);
+          location.reload();
+        })
+  
+      });
+  
+      $(".popup-close").click(function (e) {
+        $(".popup-wrap").fadeOut(500);
+        $(".popup-box")
+          .removeClass("transform-in")
+          .addClass("transform-out");
+  
+        e.preventDefault();
+      });
+    });
+  })
+  
+
+
 
 
 } else {

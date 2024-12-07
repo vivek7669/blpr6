@@ -72,20 +72,20 @@ if (uata) {
 
 const bloagGenr = async (e) => {
   e.preventDefault();
-  var response = grecaptcha.getResponse();
+  // var response = grecaptcha.getResponse();
 
   // Check if the response is empty
-  if (response.length === 0) {
-    let msg = "Pls Fill The Recaptcha.";
-    $(document).ready(function () {
-      $("#errorsuc_msg").removeClass("d-none");
-      $("#errorsuc_msg").text(msg);
-      $("#errorsuc_msg").fadeIn(1000, function () {
-        $(this).fadeOut(4000);
-      });
-    });
-    return;
-  }
+  // if (response.length === 0) {
+  //   let msg = "Pls Fill The Recaptcha.";
+  //   $(document).ready(function () {
+  //     $("#errorsuc_msg").removeClass("d-none");
+  //     $("#errorsuc_msg").text(msg);
+  //     $("#errorsuc_msg").fadeIn(1000, function () {
+  //       $(this).fadeOut(4000);
+  //     });
+  //   });
+  //   return;
+  // }
 
   // Collect other form data
   const formData = new FormData(document.querySelector("#regBloData"));
@@ -103,6 +103,7 @@ const bloagGenr = async (e) => {
 //     image : formData.get("image").name,
 //     category : document.querySelector("#category").value,
 // }
+
 
   if (
     formData.get("title") == "" ||
@@ -136,7 +137,7 @@ const bloagGenr = async (e) => {
   const req0 = await fetch(url0, option0);
   const res0 = await req0.json();
 
-  console.log(res0);
+  // console.log(res0);
   let msg = res0?.msg;
   if(msg == "Bloag Genrated Time To Occured Error."){
       suer_msg.classList.remove("d-none");

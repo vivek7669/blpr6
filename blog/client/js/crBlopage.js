@@ -55,20 +55,20 @@ if(uata){
 
 const bloagGenr = async (e) => {
     e.preventDefault();
-    var response = grecaptcha.getResponse();
+    // var response = grecaptcha.getResponse();
     
     // Check if the response is empty
-    if (response.length === 0) {
-        let msg = "Pls Fill The Recaptcha."
-        $(document).ready(function(){
-            $("#errorsuc_msg").removeClass("d-none");
-            $("#errorsuc_msg").text(msg);
-            $("#errorsuc_msg").fadeIn(1000,function(){
-                $(this).fadeOut(4000);
-            })
-        })
-        return;
-    }
+    // if (response.length === 0) {
+    //     let msg = "Pls Fill The Recaptcha."
+    //     $(document).ready(function(){
+    //         $("#errorsuc_msg").removeClass("d-none");
+    //         $("#errorsuc_msg").text(msg);
+    //         $("#errorsuc_msg").fadeIn(1000,function(){
+    //             $(this).fadeOut(4000);
+    //         })
+    //     })
+    //     return;
+    // }
     
     // Collect other form data
     const formData = new FormData(document.querySelector("#regBloData"));

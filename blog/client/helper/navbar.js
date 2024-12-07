@@ -17,7 +17,7 @@ const navbar = () => {
           <a class="nav-link" href="../web/allBlog.html">Blogs</a>
         </li>
         <li class="nav-item mr-2">
-          <a class="nav-link" href="#">BlogDescription</a>
+          <a class="nav-link" href="../web/singlePageBlog.html">BlogDescription</a>
         </li>
         <li class="nav-item mr-2">
           <a class="nav-link uname" href="../web/dashbord.html">Dashbord</a>
