@@ -22,7 +22,7 @@ const getBlogById = async (req, res) => {
 };
 const getAllBloag = async (req, res) => {
   try {
-    const data = await blpost.find().populate("author");
+    const data = await blpost.find().populate("author").populate("likedBy");
     res.send({ data });
   } catch (error) {
     res.send({ error });

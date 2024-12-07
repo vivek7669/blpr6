@@ -20,8 +20,8 @@ const bpostSchema = new mongoose.Schema({
   category: {
     type: String,
   },
-  likedBy: [{ type : mongoose.Schema.ObjectId , ref : "like" }],
-  comments: [{ type : mongoose.Schema.ObjectId  , ref : "comment"}],
+  likedBy: [{ type : mongoose.Schema.Types.ObjectId , ref : "user" }],
+  comments: [{ type : mongoose.Schema.Types.ObjectId  , ref : "comment"}],
 });
 
 const blpost = mongoose.model("blpost", bpostSchema);

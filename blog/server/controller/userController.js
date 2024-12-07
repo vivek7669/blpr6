@@ -46,7 +46,8 @@ const getAllusr = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { username, password, email , response } = req.body;
+  // const { username, password, email , response } = req.body;
+  const { username, password, email } = req.body;
     
   try {
     let isExist = await user.findOne({ email });
