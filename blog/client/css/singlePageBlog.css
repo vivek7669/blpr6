@@ -100,6 +100,14 @@ body {
     }
 }
 
+.commentmsg{
+    position: relative;
+    top : 6rem;
+    left : 77.2rem;
+    height: 4rem;
+    width: 18rem;
+    visibility: hidden;
+}
 
 
 /* Blog Grid Styles */
@@ -224,4 +232,25 @@ footer .row:last-child {
 footer .row:last-child p {
     color: #888;
     font-size: 0.9rem;
+}
+
+.comment-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+.comment-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.comment-item:last-child {
+    border-bottom: none;
+}
+.comment-author {
+    font-weight: bold;
+    color: #007bff;
+}
+.comment-text {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
 }

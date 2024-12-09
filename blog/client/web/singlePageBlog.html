@@ -47,7 +47,7 @@
                     <span class="author">By Jane Smith</span>
                     <div class="likes-comments">
                         <i class="fa fa-heart"></i> <span class="like-count">89</span>
-                        <span><i class="fa fa-comments"></i> 30</span>
+                        <span class="commentCounter" ><i class="fa fa-comments"></i> 30</span>
                     </div>
                 </div>
             </div>
@@ -56,15 +56,22 @@
     </div>
 
     <!-- Comments Section -->
-    <div class="container comments-section bg-light p-4 rounded d-flex justify-content-center">
-        <div class="w-50 ">
-            <h3>Leave a Comment</h3>
-        <form>
-            <input type="text" class="form-control mb-2" placeholder="Your Name" required>
-            <input type="email" class="form-control mb-2" placeholder="Your Email" required>
-            <textarea class="form-control mb-2" placeholder="Your Comment" rows="4" required></textarea>
-            <button type="submit" class="btn btn-primary float-right">Post Comment</button>
-        </form>
+    <div class="alert alert-info commentmsg" role="alert">
+        A simple info alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </div>
+    <div class="container comments-section bg-light p-4 rounded d-flex justify-content-center align-items-center">
+        <div class="comimgContainer" style="width: 10rem; margin-right: 10rem;">
+             <img src="../image/comment.png" width="305" alt="">
+         </div>
+        
+        <div class="comm w-100">
+            <div class="w-75">
+                <h3>Leave a Comment</h3>
+            <form id="commentData">
+                <textarea class="form-control mb-2" name="commentarea" placeholder="Your Comment" rows="4"></textarea>
+                <button type="submit" class="btn btn-primary float-right">Post Comment</button>
+            </form>
+            </div>
         </div>
     </div>
 
@@ -132,6 +139,29 @@
         </div>
     </div>
 </footer>
+
+<!-- Comments Modal -->
+<div class="modal fade" id="commentsModal" tabindex="-1" aria-labelledby="commentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="commentsModalLabel">Comments</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group comment-list">
+            <!-- Dynamic comments will be appended here -->
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
 
 <!-- Bootstrap JS, Popper.js -->
