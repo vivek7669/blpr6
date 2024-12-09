@@ -14,7 +14,7 @@ const upload = multer({ storage: storage });
 const getBlogById = async (req, res) => {
   const { id } = req.params;
   try {
-    const data = await blpost.findOne({ _id: id }).populate("author");
+    const data = await blpost.findOne({ _id: id }).populate("author").populate("comments");
     res.send({ data });
   } catch (error) {
     res.send({ error });
@@ -22,7 +22,7 @@ const getBlogById = async (req, res) => {
 };
 const getAllBloag = async (req, res) => {
   try {
-    const data = await blpost.find().populate("author").populate("likedBy");
+    const data = await blpost.find().populate("author").populate("likedBy").populate("comments");;
     res.send({ data });
   } catch (error) {
     res.send({ error });

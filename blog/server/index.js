@@ -14,6 +14,7 @@ const user = require("./model/user.schema");
 const initalization = require("./services/goInalize");
 const path = require("path");
 const likeRoute = require("./routers/likeRouter");
+const commRoute = require("./routers/commentRoute");
 
 
 const app = express();
@@ -101,6 +102,7 @@ app.use("/admin",userRoute);
 app.use("/superAdmin",userRoute);
 app.use("/blog",BloagRoute);
 app.use("/lk",likeRoute);
+app.use("/comment",commRoute);
 
 app.listen(port , ()=>{
     console.log(`Server Is listening on http://localhost:${port}/`);

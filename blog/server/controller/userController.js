@@ -19,7 +19,7 @@ const transport = nodemailer.createTransport({
 const getAllUser = async (req, res) => {
   try {
     let data = await user.find().populate('blogIds');
-    console.log(data);
+    // console.log(data);
     
     return res.send({ data });
   } catch (error) {
@@ -76,6 +76,26 @@ const createUser = async (req, res) => {
     return res.send({ msg: "User Created Time Error Occured.", err: error });
   }
 };
+
+const getCommentUserName = async (req,res) => {
+    const {data} = req.body;
+    // console.log(data.length);
+  try {
+      let users = [];
+      for (let i = 0 ; i< data.length ; i++){
+          // console.log(data[i].user);
+          let findUser = await user.findOne({_id:data[i].user})
+          // console.log(findUser.username);
+          users.push(findUser.username)
+      }
+      return res.send({users})
+  } catch (error) {
+      return res.send({error})
+  }
+
+  // console.log(req.body);
+    
+}
 
 const decodeUser = async (req,res) => {
    const {data} = await req.body
@@ -167,4 +187,4 @@ const verifyAdm = async (req,res) => {
   }
 }
 
-module.exports = { getAllUser,getAllusr, getAlladm , createUser, decodeUser, activateUser1 ,activateUser, veriUser, rmoveUser, verifyAdm };
+module.exports = { getAllUser,getAllusr, getAlladm , createUser, decodeUser, activateUser1 ,activateUser, veriUser, rmoveUser, verifyAdm , getCommentUserName};

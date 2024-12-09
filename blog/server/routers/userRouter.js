@@ -1,5 +1,5 @@
 const {Router} = require("express");
-const { getAllUser , getAlladm , verifyAdm , createUser, decodeUser , activateUser ,activateUser1, veriUser ,rmoveUser, getAllusr } = require("../controller/userController");
+const { getAllUser , getAlladm , verifyAdm , createUser, decodeUser , activateUser ,activateUser1, veriUser ,rmoveUser, getAllusr ,getCommentUserName } = require("../controller/userController");
 const {checkdata, checkdata1 } = require("../middleware/checkBody");
 const validateToken = require("../middleware/expiToken");
 const passport = require("passport");
@@ -15,7 +15,9 @@ userRoute.post("/adm/verify",verifyAdm);
 userRoute.post("/signup",checkdata,createUser);
 userRoute.post("/decodedUser",validateToken,decodeUser);
 userRoute.post("/login",checkdata1,veriUser);
+userRoute.post("/commentUserData",getCommentUserName);
 userRoute.delete("/:email",rmoveUser);
+
 
 // Google Auth Routes :
 
